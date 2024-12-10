@@ -1,0 +1,16 @@
+services:
+  n8n:
+    image: n8nio/n8n
+    container_name: n8n
+    ports:
+      - "5678:5678"  # n8n을 5678 포트에서 실행
+    volumes:
+      - ~/.n8n:/home/node/.n8n  # 설정 파일을 호스트에서 공유
+    user: "${UID}:${GID}"  # UID와 GID 설정
+    environment:
+      - N8N_BASIC_AUTH_ACTIVE=true         # 기본 인증 활성화
+      - N8N_BASIC_AUTH_USER=admin          # 기본 사용자 이름
+      - N8N_BASIC_AUTH_PASSWORD=Matinkatu9B21!  # 기본 비밀번호 (변경 필수)
+      - GENERIC_TIMEZONE=Europe/Helsinki   # 시간대 설정 (예시: Helsinki)
+    restart: unless-stopped
+
